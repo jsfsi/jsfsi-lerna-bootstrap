@@ -1,5 +1,5 @@
 {
-    "name": "@boommed-suite/mobile-react-native",
+    "name": "@jsfsi-core/mobile-react-native",
     "version": "0.0.0",
     "scripts": {
         "clean": "npm run clean:build; rm -rf node_modules",
@@ -8,7 +8,7 @@
         "build": "npm run lint && tsc"
     },
     "dependencies": {
-        "@boommed-suite/contracts": "^0.0.0"
+        "@jsfsi-core/contracts": "^0.0.0"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.3.3",

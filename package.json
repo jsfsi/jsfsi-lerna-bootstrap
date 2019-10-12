@@ -1,5 +1,5 @@
 {
-  "name": "boommed-suite",
+  "name": "jsfsi-core",
   "version": "0.0.0",
   "description": "A suite with services to manage veterinary clinics and allow end users to interact better with who takes care of their pets",
   "main": "index.js",
@@ -13,18 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joaosousafranco/boommed-suite.git"
+    "url": "git+https://github.com/joaosousafranco/jsfsi-lerna-bootstrap.git"
   },
   "keywords": [
-    "boommed",
-    "suite"
+    "jsfsi",
+    "lerna",
+    "bootstrap"
   ],
   "author": "Boommed <geral@boommed.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/joaosousafranco/boommed-suite/issues"
+    "url": "https://github.com/joaosousafranco/jsfsi-lerna-bootstrap/issues"
   },
-  "homepage": "https://github.com/joaosousafranco/boommed-suite#readme",
+  "homepage": "https://github.com/joaosousafranco/jsfsi-lerna-bootstrap#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",

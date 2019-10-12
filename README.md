@@ -1,4 +1,4 @@
-# Rest Service
+# Lerna Bootstrap
 
 Mono repo to be used as a system implementation bootstrap.
 It contains the following technologies:
@@ -19,7 +19,7 @@ It contains the following technologies:
 
 #### NodeJS Installation
 
-* MAC OS X
+- MAC OS X
 
 ```sh
 brew install node

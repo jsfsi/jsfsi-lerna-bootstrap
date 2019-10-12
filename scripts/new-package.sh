@@ -17,7 +17,7 @@ mkdir "${package_folder}"
 
 echo "
 {
-    \"name\": \"@boommed-suite/${package_name}\",
+    \"name\": \"@jsfsi-core/${package_name}\",
     \"version\": \"0.0.0\",
     \"scripts\": {
         \"clean\": \"npm run clean:build; rm -rf node_modules\",
