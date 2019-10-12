@@ -1,7 +1,7 @@
 {
   "name": "jsfsi-core",
   "version": "0.0.0",
-  "description": "A suite with services to manage veterinary clinics and allow end users to interact better with who takes care of their pets",
+  "description": "Mono repo to be used as a system implementation bootstrap.",
   "main": "index.js",
   "scripts": {
     "clean": "lerna run clean; rm -rf node_modules",
