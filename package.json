@@ -20,7 +20,7 @@
     "lerna",
     "bootstrap"
   ],
-  "author": "Boommed <geral@boommed.com>",
+  "author": "JSFSI <joao.franco@jsfsi.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/joaosousafranco/jsfsi-lerna-bootstrap/issues"
