@@ -5,7 +5,7 @@
         "clean": "npm run clean:build; rm -rf node_modules",
         "clean:build": "rm -rf dist",
         "lint": "eslint . --quiet --fix --ext .ts,.tsx",
-        "build": "npm run lint && tsc"
+        "build": "npm run clean:build && npm run lint && tsc"
     },
     "dependencies": {
         "@jsfsi-core/contracts": "^0.0.0"

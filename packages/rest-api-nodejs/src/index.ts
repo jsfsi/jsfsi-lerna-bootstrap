@@ -1,13 +1,5 @@
-import { Link, HttpMethods, HttpRequest } from '@jsfsi-core/typescript-cross-platform'
+import { RestServerBuilder, Logger } from '@jsfsi-core/typescript-nodejs'
 
-const googleLink = {
-    method: HttpMethods.GET,
-    href: 'http://google.com',
-} as Link
+Logger.configure('debug')
 
-const call = async (link: Link) => {
-    const response = await HttpRequest.fetch(link)
-    console.log(response.data)
-}
-
-call(googleLink)
+new RestServerBuilder().build().start()

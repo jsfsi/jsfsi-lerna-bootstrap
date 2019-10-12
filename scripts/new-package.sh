@@ -23,7 +23,7 @@ echo "
         \"clean\": \"npm run clean:build; rm -rf node_modules\",
         \"clean:build\": \"rm -rf dist\",
         \"lint\": \"eslint . --quiet --fix --ext .ts,.tsx\",
-        \"build\": \"npm run lint && tsc\"
+        \"build\": \"npm run clean:build && npm run lint && tsc\"
     },
     \"devDependencies\": {
         \"@typescript-eslint/eslint-plugin\": \"^2.3.3\",

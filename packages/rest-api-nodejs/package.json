@@ -5,11 +5,13 @@
         "clean": "npm run clean:build; rm -rf node_modules",
         "clean:build": "rm -rf dist",
         "lint": "eslint . --quiet --fix --ext .ts,.tsx",
-        "build": "npm run lint && tsc"
+        "build": "npm run clean:build && npm run lint && tsc"
     },
     "dependencies": {
         "@jsfsi-core/contracts": "^0.0.0",
-        "@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git"
+        "@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
+        "@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
+        "typescript-ioc": "^1.2.5"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.3.3",
