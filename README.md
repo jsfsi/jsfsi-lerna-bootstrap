@@ -62,11 +62,13 @@ npm run build
 ## Add dependencies to packages
 
 ```sh
-cd packages/<package-name>
-# Development dependency
-npm install --save-dev <package_name>
-# Production dependency
-npm install --save-dev <package_name>
+lerna add <dependency> --scope=<package_name>
+```
+
+## Execute command in packages
+
+```sh
+lerna exec --scope=<package_name> -- <command>
 ```
 
 ## Convert pfx to key and crt

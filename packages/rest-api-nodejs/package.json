@@ -8,7 +8,8 @@
         "build": "npm run lint && tsc"
     },
     "dependencies": {
-        "@jsfsi-core/contracts": "^0.0.0"
+        "@jsfsi-core/contracts": "^0.0.0",
+        "@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.3.3",
