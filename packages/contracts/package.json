@@ -1,0 +1,20 @@
+{
+    "name": "@boommed-suite/contracts",
+    "version": "0.0.0",
+    "scripts": {
+        "clean": "npm run clean:build; rm -rf node_modules",
+        "clean:build": "rm -rf dist",
+        "lint": "eslint . --quiet --fix --ext .ts,.tsx",
+        "build": "npm run lint && tsc"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.3.3",
+        "@typescript-eslint/parser": "^2.3.3",
+        "eslint": "^6.5.1",
+        "eslint-config-prettier": "^6.4.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "eslint-plugin-react": "^7.16.0",
+        "eslint-plugin-react-hooks": "^2.1.2",
+        "typescript": "3.6.4"
+    }
+}

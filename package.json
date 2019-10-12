@@ -1,0 +1,40 @@
+{
+  "name": "boommed-suite",
+  "version": "0.0.0",
+  "description": "A suite with services to manage veterinary clinics and allow end users to interact better with who takes care of their pets",
+  "main": "index.js",
+  "scripts": {
+    "clean": "lerna run clean; rm -rf node_modules",
+    "clean:build": "lerna run clean:build",
+    "setup": "npm run clean && npm install && npm run bootstrap",
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint",
+    "build": "npm run clean:build && npm run lint && lerna run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaosousafranco/boommed-suite.git"
+  },
+  "keywords": [
+    "boommed",
+    "suite"
+  ],
+  "author": "Boommed <geral@boommed.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaosousafranco/boommed-suite/issues"
+  },
+  "homepage": "https://github.com/joaosousafranco/boommed-suite#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "lerna": "3.17.0",
+    "prettier": "^1.18.2",
+    "typescript": "3.6.4"
+  }
+}
