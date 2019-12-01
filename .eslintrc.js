@@ -14,12 +14,13 @@ module.exports =  {
     jsx: true,
     useJSXTextNode: true
   },
-  plugins: ["@typescript-eslint", "react-hooks"],
+  plugins: ['@typescript-eslint', 'react-hooks'],
   rules:  {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/member-delimiter-style': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_*' }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn'
   },

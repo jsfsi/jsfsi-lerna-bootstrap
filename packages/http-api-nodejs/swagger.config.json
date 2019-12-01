@@ -1,0 +1,15 @@
+{
+    "swagger": {
+        "outputDirectory": "./dist",
+        "entryFile": "./src/index.ts",
+        "name": "JSFSI Http Api Bootstrap",
+        "description": "JSFSI Http Api Bootstrap Rest API",
+        "license": "MIT",
+        "produces": [
+            "application/json"
+        ],
+        "version": "0.0.1",
+        "yaml": false,
+        "collectionFormat": "multi"
+    }
+}
