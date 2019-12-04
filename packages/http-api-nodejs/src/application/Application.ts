@@ -1,13 +1,12 @@
 import { Logger, HttpServerBuilder, HttpServer } from '@jsfsi-core/typescript-nodejs'
 import { Configuration } from './Configuration'
 import controllers from '../rest/controllers'
-import { ApolloServer } from 'apollo-server-express'
-import graphqlConfig from '../graphql'
+import resolvers from '../graphql/resolvers'
 
 export class Application {
     private server: HttpServer
 
-    public configure() {
+    public async configure() {
         Logger.configure(Configuration.log.level)
         Logger.info('Configuring application')
 
@@ -18,12 +17,12 @@ export class Application {
             .withCookieParser({})
             .withCors(Configuration.server.corsDomains)
             .withControllers(controllers)
+            .withGraphql({
+                path: '/graphql',
+                resolvers,
+                tracing: true,
+            })
             .build()
-
-        const graphqlServer = new ApolloServer(graphqlConfig)
-
-        Logger.info('Graphql playground available in path: /graphql')
-        graphqlServer.applyMiddleware({ app: this.server.application, path: '/graphql' })
     }
 
     public start() {

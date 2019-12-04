@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "es6",
+    "target": "es2016",
     "module": "commonjs",
     "pretty": true,
     "allowJs": true,
@@ -29,6 +29,10 @@
       {
         "name": "typescript-tslint-plugin"
       }
+    ],
+    "lib": [
+      "es2016",
+      "esnext.asynciterable"
     ]
   },
   "exclude": [
