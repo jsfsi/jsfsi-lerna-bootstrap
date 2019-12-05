@@ -1,7 +1,7 @@
 import { Logger, HttpServerBuilder, HttpServer } from '@jsfsi-core/typescript-nodejs'
 import { Configuration } from './Configuration'
-import controllers from '../rest/controllers'
-import resolvers from '../graphql/resolvers'
+import controllers from '../communication/rest/controllers'
+import resolvers from '../communication/graphql/resolvers'
 
 export class Application {
     private server: HttpServer
@@ -20,7 +20,8 @@ export class Application {
             .withGraphql({
                 path: '/graphql',
                 resolvers,
-                tracing: true,
+                tracing: Configuration.graphql.tracing,
+                playground: Configuration.graphql.playground,
             })
             .build()
     }

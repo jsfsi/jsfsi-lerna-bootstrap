@@ -15,7 +15,7 @@ It contains the following technologies:
 
 ### Visual Studio Code latest
 
-### NodeJS 12.11.1
+### NodeJS v12.13.1
 
 #### NodeJS Installation
 
@@ -24,7 +24,7 @@ It contains the following technologies:
 ```sh
 brew install node
 sudo npm install -g n
-sudo n 12.11.1
+sudo n 12.13.1
 ```
 
 ## Setup project
@@ -86,3 +86,8 @@ openssl pkcs12 -in <filename.pfx> -nocerts -out private.key
 openssl pkcs12 -in <filename.pfx> -clcerts -nokeys -out certificate.crt
 openssl rsa -in private.key -out decrypted-private.key
 ```
+
+## (WIP) Architecture
+
+- Contracts are important to be used when implementing a rest api server and a rest api client application
+- Contracts don't make sense when implementing a Graphql api server because the Graphql api client has the responsability to define what to fetch preventing that way the overfetching issues

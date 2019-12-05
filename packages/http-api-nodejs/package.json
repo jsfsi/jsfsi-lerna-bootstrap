@@ -13,6 +13,7 @@
         "@jsfsi-core/contracts": "^0.0.0",
         "@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
         "@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
+        "npm": "^6.13.2",
         "typescript-ioc": "^1.2.5"
     },
     "devDependencies": {

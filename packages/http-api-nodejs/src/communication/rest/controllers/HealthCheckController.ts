@@ -1,5 +1,6 @@
 import { GET, Path } from 'typescript-rest'
 import { Tags } from 'typescript-rest-swagger'
+import * as HealthService from '../../../services/HealthService'
 
 @Path('/rest/health')
 export class HealthCheckController {
@@ -7,6 +8,6 @@ export class HealthCheckController {
     @Path('/')
     @Tags('HealthCheck')
     public async health() {
-        return 'OK'
+        return HealthService.healthCheck()
     }
 }

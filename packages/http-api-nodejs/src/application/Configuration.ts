@@ -7,4 +7,9 @@ export const Configuration = {
     log: {
         level: process.env.LOG_LEVEL || 'info',
     },
+    graphql: {
+        path: process.env.GRAPHQL_PATH || '/graphql',
+        tracing: process.env.GRAPHQL_TRACING?.toLowerCase() === 'true' || false,
+        playground: process.env.GRAPHQL_PLAYGROUND?.toLowerCase() === 'true' || false,
+    },
 }

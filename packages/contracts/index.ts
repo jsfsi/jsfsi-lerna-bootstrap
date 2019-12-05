@@ -1,1 +1,1 @@
-console.log('Im the package packages/contracts')
+export * from './src'
