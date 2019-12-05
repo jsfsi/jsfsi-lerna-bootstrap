@@ -1,29 +1,31 @@
 {
-    "name": "@jsfsi-core/http-api-nodejs",
-    "version": "0.0.0",
-    "scripts": {
-        "clean": "npm run clean:build; rm -rf node_modules",
-        "clean:build": "rm -rf dist",
-        "lint": "eslint . --quiet --fix --ext .ts,.tsx",
-        "swagger": "swaggerGen -c ./swagger.config.json",
-        "build": "npm run clean:build && npm run lint && npm run swagger && tsc",
-        "start": "node dist/src/index.js"
-    },
-    "dependencies": {
-        "@jsfsi-core/contracts": "^0.0.0",
-        "@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
-        "@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
-        "npm": "^6.13.2",
-        "typescript-ioc": "^1.2.5"
-    },
-    "devDependencies": {
-        "@types/node-fetch": "^2.5.4",
-        "@typescript-eslint/eslint-plugin": "2.9.0",
-        "@typescript-eslint/parser": "2.9.0",
-        "eslint": "6.7.1",
-        "eslint-config-prettier": "6.7.0",
-        "eslint-plugin-prettier": "3.1.1",
-        "typescript": "3.7.2",
-        "typescript-rest-swagger": "^1.0.4"
-    }
+	"name": "@jsfsi-core-bootstrap/http-api-nodejs",
+	"version": "0.0.0",
+	"scripts": {
+		"clean": "npm run clean:build; rm -rf node_modules",
+		"clean:build": "rm -rf dist",
+		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
+		"swagger": "swaggerGen -c ./swagger.config.json",
+		"build": "npm run clean:build && npm run lint && npm run swagger && tsc",
+		"watch": "npm run build && tsc -w",
+		"debug": "nodemon --watch dist --inspect=0.0.0.0:3001 --nolazy dist/src/index.js",
+		"start": "node dist/src/index.js"
+	},
+	"dependencies": {
+		"@jsfsi-core-bootstrap/contracts": "^0.0.0",
+		"@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
+		"@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
+		"typescript-ioc": "^1.2.5"
+	},
+	"devDependencies": {
+		"@types/node-fetch": "2.5.4",
+		"@typescript-eslint/eslint-plugin": "2.9.0",
+		"@typescript-eslint/parser": "2.9.0",
+		"eslint": "6.7.1",
+		"eslint-config-prettier": "6.7.0",
+		"eslint-plugin-prettier": "3.1.1",
+		"nodemon": "2.0.1",
+		"typescript": "3.7.2",
+		"typescript-rest-swagger": "^1.0.4"
+	}
 }

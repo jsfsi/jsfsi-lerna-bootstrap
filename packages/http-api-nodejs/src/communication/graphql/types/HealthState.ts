@@ -1,5 +1,5 @@
 import { ObjectType, Field } from 'type-graphql'
-import * as contracts from '@jsfsi-core/contracts'
+import * as contracts from '@jsfsi-core-bootstrap/contracts'
 
 @ObjectType()
 export class HealthState implements contracts.HealthState {

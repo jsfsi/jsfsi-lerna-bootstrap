@@ -1,5 +1,5 @@
 {
-  "name": "jsfsi-core",
+  "name": "jsfsi-core-bootstrap",
   "version": "0.0.0",
   "description": "Mono repo to be used as a system implementation bootstrap.",
   "keywords": [

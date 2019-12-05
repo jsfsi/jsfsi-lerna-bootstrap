@@ -1,6 +1,6 @@
 import { Resolver, Query } from 'type-graphql'
 import * as HealthService from '../../../services/HealthService'
-import { HealthState } from '../schemas/HealthState'
+import { HealthState } from '../types/HealthState'
 
 @Resolver(HealthState)
 export class HealthResolver {

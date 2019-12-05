@@ -15,7 +15,7 @@ It contains the following technologies:
 
 ### Visual Studio Code latest
 
-### NodeJS v12.13.1
+### NodeJS 13.3.0
 
 #### NodeJS Installation
 
@@ -24,7 +24,7 @@ It contains the following technologies:
 ```sh
 brew install node
 sudo npm install -g n
-sudo n 12.13.1
+sudo n 13.3.0
 ```
 
 ## Setup project
