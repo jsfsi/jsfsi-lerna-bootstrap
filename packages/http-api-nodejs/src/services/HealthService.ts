@@ -5,6 +5,6 @@ export const healthCheck = (): HealthState => {
     return {
         healthy: true,
         date: new Date(),
-        version: Configuration.version + 'debug',
+        version: Configuration.version,
     }
 }

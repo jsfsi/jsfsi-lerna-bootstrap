@@ -91,3 +91,13 @@ openssl rsa -in private.key -out decrypted-private.key
 
 - Contracts are important to be used when implementing a rest api server and a rest api client application
 - Contracts don't make sense when implementing a Graphql api server because the Graphql api client has the responsability to define what to fetch preventing that way the overfetching issues
+
+## Generate JWT Key
+
+```sh
+docker run -it ubuntu bash
+apt-get update
+apt-get install keychain openssl -y
+ssh-keygen -t rsa -b 4096 -f jwt.key && openssl rsa -in jwt.key -pubout -outform PEM -out jwt.key.pub
+cat jwt.key | base64 --wrap=0 && echo "" && echo "" && cat jwt.key.pub | base64 --wrap=0 && echo "" && echo "" && cat jwt.key.pub
+```

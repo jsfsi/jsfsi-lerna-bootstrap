@@ -2,29 +2,78 @@
 	"name": "@jsfsi-core-bootstrap/http-api-nodejs",
 	"version": "0.0.0",
 	"scripts": {
+		"build": "npm run clean:build && npm run lint && npm run swagger && tsc",
 		"clean": "npm run clean:build; rm -rf node_modules",
 		"clean:build": "rm -rf dist",
+		"debug:local": ". ../../pipelines/http-api-nodejs/environments/local.env && nodemon --watch dist --inspect=0.0.0.0:3001 --nolazy dist/src/index.js",
 		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
+		"start:local": ". ../../pipelines/http-api-nodejs/environments/local.env && node dist/src/index.js",
 		"swagger": "swaggerGen -c ./swagger.config.json",
-		"build": "npm run clean:build && npm run lint && npm run swagger && tsc",
-		"watch": "npm run build && tsc -w",
-		"debug": "nodemon --watch dist --inspect=0.0.0.0:3001 --nolazy dist/src/index.js",
-		"start": "node dist/src/index.js"
+		"test:local:integration": ". tests/configuration/test.local.env && jest --rootDir tests/integration",
+		"test:local:integration:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3002 --nolazy node_modules/.bin/jest --rootDir tests/integration",
+		"watch": "npm run build && tsc -w"
+	},
+	"jest": {
+		"clearMocks": true,
+		"collectCoverage": false,
+		"collectCoverageFrom": [
+			"src/**/*.{ts,js}",
+			"!src/**/*.d.ts"
+		],
+		"coveragePathIgnorePatterns": [
+			"/node_modules/",
+			"index.ts"
+		],
+		"coverageReporters": [
+			"json",
+			"lcov",
+			"text",
+			"text-summary"
+		],
+		"globals": {
+			"ts-jest": {
+				"babelConfig": false,
+				"tsConfig": "tsconfig.json"
+			}
+		},
+		"moduleFileExtensions": [
+			"js",
+			"ts",
+			"json"
+		],
+		"moduleNameMapper": {
+			"^src/(.*)$": "<rootDir>/src/$1",
+			"^tests/(.*)$": "<rootDir>/tests/$1"
+		},
+		"preset": "ts-jest",
+		"testEnvironment": "node",
+		"testMatch": [
+			"**/*.(test|spec).(ts)"
+		],
+		"transform": {
+			"^.+\\.ts?$": "ts-jest"
+		}
 	},
 	"dependencies": {
 		"@jsfsi-core-bootstrap/contracts": "^0.0.0",
 		"@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
 		"@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
+		"jsonwebtoken": "^8.5.1",
 		"typescript-ioc": "^1.2.5"
 	},
 	"devDependencies": {
-		"@types/node-fetch": "2.5.4",
+		"@types/jest": "^24.0.23",
+		"@types/jsonwebtoken": "^8.3.5",
 		"@typescript-eslint/eslint-plugin": "2.9.0",
 		"@typescript-eslint/parser": "2.9.0",
+		"apollo-boost": "^0.4.4",
+		"cross-fetch": "^3.0.4",
 		"eslint": "6.7.1",
 		"eslint-config-prettier": "6.7.0",
 		"eslint-plugin-prettier": "3.1.1",
+		"jest": "^24.9.0",
 		"nodemon": "2.0.1",
+		"ts-jest": "^24.2.0",
 		"typescript": "3.7.2",
 		"typescript-rest-swagger": "^1.0.4"
 	}
