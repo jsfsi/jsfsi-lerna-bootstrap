@@ -18,8 +18,19 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Http API nodejs Integration Tests",
+            "name": "Http API nodejs Unit Tests",
             "port": 3002,
+            "restart": true,
+            "sourceMaps": true,
+            "localRoot": "${workspaceFolder}/packages/http-api-nodejs/tests",
+            "remoteRoot": "${workspaceFolder}/packages/http-api-nodejs/tests",
+            "cwd": "${workspaceFolder}/packages/http-api-nodejs"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Http API nodejs Integration Tests",
+            "port": 3003,
             "restart": true,
             "sourceMaps": true,
             "localRoot": "${workspaceFolder}/packages/http-api-nodejs/tests",

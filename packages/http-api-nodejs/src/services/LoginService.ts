@@ -13,16 +13,24 @@ export const loginWithGoogle = async (accessToken: string): Promise<Login> => {
         })
 
         const jwtPrivateKey = Buffer.from(Configuration.jwt.privateKey, 'base64')
-        const jwtExpirationDate = (new Date().getTime() + (Configuration.jwt.duration || 0)) / 1000
+        const jwtExpirationDate =
+            (new Date().getTime() + (Configuration.jwt.duration || 0)) / 1000
         const signOptions: SignOptions = { algorithm: 'RS512' }
 
         // TODO:
         // - Sign JWT with user data
         return {
-            token: sign({ user: request.data, exp: jwtExpirationDate }, jwtPrivateKey, signOptions),
+            token: sign(
+                { user: request.data, exp: jwtExpirationDate },
+                jwtPrivateKey,
+                signOptions,
+            ),
         }
     } catch (error) {
-        Logger.debug(`Failed to authenticate with google access token: ${accessToken} | `, error)
+        Logger.debug(
+            `Failed to authenticate with google access token: ${accessToken} | `,
+            error,
+        )
         throw new AuthenticateException('Unable to authenticate with google')
     }
 }

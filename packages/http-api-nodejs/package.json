@@ -9,8 +9,11 @@
 		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
 		"start:local": ". ../../pipelines/http-api-nodejs/environments/local.env && node dist/src/index.js",
 		"swagger": "swaggerGen -c ./swagger.config.json",
+		"test:unit": ". tests/configuration/test.local.env && jest --rootDir tests/unit",
+		"test:unit:watch": ". tests/configuration/test.local.env && jest --rootDir tests/unit --watchAll",
+		"test:unit:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3002 --nolazy node_modules/.bin/jest --rootDir tests/unit",
 		"test:local:integration": ". tests/configuration/test.local.env && jest --rootDir tests/integration",
-		"test:local:integration:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3002 --nolazy node_modules/.bin/jest --rootDir tests/integration",
+		"test:local:integration:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3003 --nolazy node_modules/.bin/jest --rootDir tests/integration",
 		"watch": "npm run build && tsc -w"
 	},
 	"jest": {

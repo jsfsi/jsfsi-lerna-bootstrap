@@ -43,7 +43,7 @@ npm run build
 ## Build all packages
 
 ```sh
-yarn build
+npm run build
 ```
 
 ## Lint all packages

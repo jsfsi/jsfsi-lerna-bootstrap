@@ -19,9 +19,10 @@ export class Application {
             .withControllers(controllers)
             .withGraphql({
                 path: '/graphql',
+                playground: Configuration.graphql.playground,
                 resolvers,
                 tracing: Configuration.graphql.tracing,
-                playground: Configuration.graphql.playground,
+                introspection: Configuration.graphql.introspection,
             })
             .build()
     }
