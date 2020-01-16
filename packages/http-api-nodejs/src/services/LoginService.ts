@@ -1,30 +1,32 @@
-import { Login } from '@jsfsi-core-bootstrap/contracts'
+import { Login, User } from '@jsfsi-core-bootstrap/contracts'
 import { Configuration } from '../application/Configuration'
 import { HttpRequest, HttpMethods } from '@jsfsi-core/typescript-cross-platform'
-import { Logger } from '@jsfsi-core/typescript-nodejs'
+import { Logger, TokenGenerator } from '@jsfsi-core/typescript-nodejs'
 import { AuthenticateException } from './exceptions/AuthenticateException'
-import { sign, SignOptions } from 'jsonwebtoken'
 
 export const loginWithGoogle = async (accessToken: string): Promise<Login> => {
     try {
-        const request = await HttpRequest.fetch({
+        const request = await HttpRequest.fetch<User>({
             href: `${Configuration.google.tokenInfoURL}${accessToken}`,
             method: HttpMethods.GET,
         })
 
-        const jwtPrivateKey = Buffer.from(Configuration.jwt.privateKey, 'base64')
-        const jwtExpirationDate =
-            (new Date().getTime() + (Configuration.jwt.duration || 0)) / 1000
-        const signOptions: SignOptions = { algorithm: 'RS512' }
+        const token = await TokenGenerator.generateJWT<User>(
+            { email: request?.data?.email },
+            {
+                expirationDate:
+                    (new Date().getTime() + (Configuration.jwt.duration || 0)) / 1000,
+                privateKey: Buffer.from(Configuration.jwt.privateKey, 'base64'),
+                algorithm: Configuration.jwt.algorithm,
+            },
+        )
 
         // TODO:
-        // - Sign JWT with user data
+        // - Use an hydrator to hydrate the google user
+        // - Add long lived refresh token
+        // - Return long lived refresh token in http only cookie
         return {
-            token: sign(
-                { user: request.data, exp: jwtExpirationDate },
-                jwtPrivateKey,
-                signOptions,
-            ),
+            token,
         }
     } catch (error) {
         Logger.debug(

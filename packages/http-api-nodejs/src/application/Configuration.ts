@@ -2,6 +2,7 @@ export const Configuration = {
     version: process.env.VERSION || 'local',
     jwt: {
         privateKey: process.env.JWT_PRIVATE_KEY,
+        algorithm: process.env.JWT_ALGORITHM,
         duration:
             (process.env.JWT_DURATION && parseInt(process.env.JWT_DURATION)) || 5 * 60,
     },

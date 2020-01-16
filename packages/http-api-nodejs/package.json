@@ -9,10 +9,8 @@
 		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
 		"start:local": ". ../../pipelines/http-api-nodejs/environments/local.env && node dist/src/index.js",
 		"swagger": "swaggerGen -c ./swagger.config.json",
-		"test:unit": ". tests/configuration/test.local.env && jest --rootDir tests/unit",
-		"test:unit:watch": ". tests/configuration/test.local.env && jest --rootDir tests/unit --watchAll",
-		"test:unit:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3002 --nolazy node_modules/.bin/jest --rootDir tests/unit",
 		"test:local:integration": ". tests/configuration/test.local.env && jest --rootDir tests/integration",
+		"test:local:integration:watch": ". tests/configuration/test.local.env && jest --rootDir tests/integration --watchAll",
 		"test:local:integration:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3003 --nolazy node_modules/.bin/jest --rootDir tests/integration",
 		"watch": "npm run build && tsc -w"
 	},
@@ -61,12 +59,10 @@
 		"@jsfsi-core-bootstrap/contracts": "^0.0.0",
 		"@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
 		"@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
-		"jsonwebtoken": "^8.5.1",
 		"typescript-ioc": "^1.2.5"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.23",
-		"@types/jsonwebtoken": "^8.3.5",
 		"@typescript-eslint/eslint-plugin": "2.9.0",
 		"@typescript-eslint/parser": "2.9.0",
 		"apollo-boost": "^0.4.4",

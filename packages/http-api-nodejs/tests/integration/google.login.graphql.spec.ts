@@ -1,8 +1,8 @@
 import 'cross-fetch/polyfill'
-import { executeShell } from '@jsfsi-core/typescript-nodejs'
+import { executeShell, TokenGenerator } from '@jsfsi-core/typescript-nodejs'
+import { User, Login } from '@jsfsi-core-bootstrap/contracts'
 import { Configuration } from '../configuration/Configuration'
 import ApolloClient, { gql, ApolloError } from 'apollo-boost'
-import { Login } from '../../src/communication/graphql/types/Login'
 
 const graphqlClient = new ApolloClient({
     uri: `${Configuration.baseUrl}${Configuration.graphqlPath}`,
@@ -20,6 +20,9 @@ const loginMutation = gql`
 describe('Login using graphql and google', () => {
     it('with success', async () => {
         const googleAccessToken = await executeShell('gcloud auth print-access-token')
+        const googleUserEmail = ((await executeShell(
+            'gcloud config list account --format "value(core.account)"',
+        )) as string).trim()
 
         const mutationResult = await graphqlClient.mutate<{ loginWithGoogle: Login }>({
             mutation: loginMutation,
@@ -29,8 +32,14 @@ describe('Login using graphql and google', () => {
         })
 
         const token = mutationResult?.data?.loginWithGoogle?.token
+        const user = await TokenGenerator.verifyJWT<User>(token, {
+            publicKey: Buffer.from(Configuration.jwt.publicKey, 'base64'),
+            algorithms: [Configuration.jwt.algorithm],
+        })
 
         expect(token).toBeTruthy()
+        expect(user).toBeTruthy()
+        expect(user.email).toStrictEqual(googleUserEmail)
     })
 
     it('with invalid google access token', async () => {
