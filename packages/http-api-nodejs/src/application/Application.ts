@@ -2,27 +2,31 @@ import { Logger, HttpServerBuilder, HttpServer } from '@jsfsi-core/typescript-no
 import { Configuration } from './Configuration'
 import controllers from '../communication/rest/controllers'
 import resolvers from '../communication/graphql/resolvers'
+import { Inject } from 'typescript-ioc'
 
 export class Application {
+    @Inject
+    private configuration: Configuration
+
     private server: HttpServer
 
     public async configure() {
-        Logger.configure(Configuration.log.level)
+        Logger.configure(this.configuration.log.level)
         Logger.info('Configuring application')
 
         this.server = new HttpServerBuilder()
             .withSwagger({ docsEndpoint: '/rest/docs' })
-            .withPort(Configuration.server.port)
+            .withPort(this.configuration.server.port)
             .withJsonParse({ limit: '5mb' })
             .withCookieParser({})
-            .withCors(Configuration.server.corsDomains)
+            .withCors(this.configuration.server.corsDomains)
             .withControllers(controllers)
             .withGraphql({
                 path: '/graphql',
-                playground: Configuration.graphql.playground,
+                playground: this.configuration.graphql.playground,
                 resolvers,
-                tracing: Configuration.graphql.tracing,
-                introspection: Configuration.graphql.introspection,
+                tracing: this.configuration.graphql.tracing,
+                introspection: this.configuration.graphql.introspection,
             })
             .build()
     }

@@ -1,3 +1,4 @@
 import { HealthCheckController } from './controllers/HealthCheckController'
+import { LoginController } from './controllers/LoginController'
 
-export default [HealthCheckController]
+export default [HealthCheckController, LoginController]

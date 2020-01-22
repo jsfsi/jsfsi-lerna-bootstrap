@@ -2,36 +2,28 @@ import 'cross-fetch/polyfill'
 import { executeShell, TokenGenerator } from '@jsfsi-core/typescript-nodejs'
 import { User, Login } from '@jsfsi-core-bootstrap/contracts'
 import { Configuration } from '../configuration/Configuration'
-import ApolloClient, { gql, ApolloError } from 'apollo-boost'
+import {
+    HttpRequest,
+    HttpMethods,
+    HttpRequestError,
+} from '@jsfsi-core/typescript-cross-platform'
 
-const graphqlClient = new ApolloClient({
-    uri: `${Configuration.baseUrl}${Configuration.graphqlPath}`,
-    onError: _ => {},
-})
-
-const loginMutation = gql`
-    mutation LoginWithGoogle($accessToken: String!) {
-        loginWithGoogle(accessToken: $accessToken) {
-            token
-        }
-    }
-`
-
-describe('Login using graphql and google', () => {
+describe('Login using rest and google', () => {
     it('with success', async () => {
         const googleAccessToken = await executeShell('gcloud auth print-access-token')
         const googleUserEmail = ((await executeShell(
             'gcloud config list account --format "value(core.account)"',
         )) as string).trim()
 
-        const mutationResult = await graphqlClient.mutate<{ loginWithGoogle: Login }>({
-            mutation: loginMutation,
-            variables: {
-                accessToken: googleAccessToken,
+        const userLogin = await HttpRequest.fetch<Login>(
+            {
+                href: `${Configuration.baseUrl}${Configuration.restPath}/login/google`,
+                method: HttpMethods.POST,
             },
-        })
+            { accessToken: googleAccessToken },
+        )
 
-        const token = mutationResult?.data?.loginWithGoogle?.token
+        const token = userLogin?.data?.token
         const user = await TokenGenerator.verifyJWT<User>(token, {
             publicKey: Buffer.from(Configuration.jwt.publicKey, 'base64'),
             algorithms: [Configuration.jwt.algorithm],
@@ -49,17 +41,17 @@ describe('Login using graphql and google', () => {
 
     it('with invalid google access token', async () => {
         try {
-            await graphqlClient.mutate<{ loginWithGoogle: Login }>({
-                mutation: loginMutation,
-                variables: {
-                    accessToken: 'test',
+            await HttpRequest.fetch<Login>(
+                {
+                    href: `${Configuration.baseUrl}${Configuration.restPath}/login/google`,
+                    method: HttpMethods.POST,
                 },
-            })
-        } catch (error) {
-            const apolloError = error as ApolloError
-            expect(apolloError.graphQLErrors[0].extensions['code']).toBe(
-                'UNAUTHENTICATED',
+                { accessToken: 'invalid' },
             )
+        } catch (error) {
+            const httpError = error as HttpRequestError
+
+            expect(httpError.statusCode).toBe(401)
         }
     })
 })
