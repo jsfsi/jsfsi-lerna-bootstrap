@@ -6,12 +6,13 @@
 		"clean": "npm run clean:build; rm -rf node_modules",
 		"clean:build": "rm -rf dist",
 		"debug:local": ". ../../pipelines/http-api-nodejs/environments/local.env && nodemon --watch dist --inspect=0.0.0.0:3001 --nolazy dist/src/index.js",
+		"generate:orm:models": "rm -rf src/data/models && sequelize-auto -h localhost -d postgres -s bootstrap -u postgres -x postgres -p 5432 --dialect postgres -o './src/data/models' -z",
 		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
 		"start:local": ". ../../pipelines/http-api-nodejs/environments/local.env && node dist/src/index.js",
 		"swagger": "swaggerGen -c ./swagger.config.json",
 		"test:local:integration": ". tests/configuration/test.local.env && jest --rootDir tests/integration",
-		"test:local:integration:watch": ". tests/configuration/test.local.env && jest --rootDir tests/integration --watchAll",
 		"test:local:integration:debug": ". tests/configuration/test.local.env && nodemon --watch dist --inspect-brk=0.0.0.0:3003 --nolazy node_modules/.bin/jest --rootDir tests/integration",
+		"test:local:integration:watch": ". tests/configuration/test.local.env && jest --rootDir tests/integration --watchAll",
 		"watch": "npm run build && tsc -w"
 	},
 	"jest": {
@@ -59,6 +60,8 @@
 		"@jsfsi-core-bootstrap/contracts": "^0.0.0",
 		"@jsfsi-core/typescript-cross-platform": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-cross-platform.git",
 		"@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
+		"pg": "^7.17.1",
+		"pg-hstore": "^2.3.3",
 		"typescript-ioc": "^1.2.5"
 	},
 	"devDependencies": {
