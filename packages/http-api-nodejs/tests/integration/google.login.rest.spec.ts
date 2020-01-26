@@ -1,12 +1,12 @@
 import 'cross-fetch/polyfill'
 import { executeShell, TokenGenerator } from '@jsfsi-core/typescript-nodejs'
-import { User, Login } from '@jsfsi-core-bootstrap/contracts'
 import { Configuration } from '../configuration/Configuration'
 import {
     HttpRequest,
     HttpMethods,
     HttpRequestError,
 } from '@jsfsi-core/typescript-cross-platform'
+import { Login, UserToken } from '../../src/communication/graphql/types/Login'
 
 describe('Login using rest and google', () => {
     it('with success', async () => {
@@ -24,7 +24,7 @@ describe('Login using rest and google', () => {
         )
 
         const token = userLogin?.data?.token
-        const user = await TokenGenerator.verifyJWT<User>(token, {
+        const user = await TokenGenerator.verifyJWT<UserToken>(token, {
             publicKey: Buffer.from(Configuration.jwt.publicKey, 'base64'),
             algorithms: [Configuration.jwt.algorithm],
         })
@@ -33,10 +33,9 @@ describe('Login using rest and google', () => {
         expect(user).toBeTruthy()
         expect(user.email).toStrictEqual(googleUserEmail)
         expect(user.id).toBeTruthy()
-        expect(user.tenants).toBeTruthy()
-        expect(user.tenants.length).toBeTruthy()
+        expect(user.tenant).toBeTruthy()
         expect(user.roles).toBeTruthy()
-        expect(user.roles.length).toBeTruthy()
+        expect(Object.keys(user.roles).length).toBeGreaterThan(0)
     })
 
     it('with invalid google access token', async () => {

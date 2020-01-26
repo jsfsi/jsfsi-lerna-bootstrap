@@ -3,6 +3,7 @@ import { Configuration } from './Configuration'
 import controllers from '../communication/rest/controllers'
 import resolvers from '../communication/graphql/resolvers'
 import { Inject } from 'typescript-ioc'
+import { createConnection, ConnectionOptions } from 'typeorm'
 
 export class Application {
     @Inject
@@ -10,10 +11,7 @@ export class Application {
 
     private server: HttpServer
 
-    public async configure() {
-        Logger.configure(this.configuration.log.level)
-        Logger.info('Configuring application')
-
+    private configureServer() {
         this.server = new HttpServerBuilder()
             .withSwagger({ docsEndpoint: '/rest/docs' })
             .withPort(this.configuration.server.port)
@@ -27,8 +25,33 @@ export class Application {
                 resolvers,
                 tracing: this.configuration.graphql.tracing,
                 introspection: this.configuration.graphql.introspection,
+                context: ({ res }) => {
+                    return { response: res }
+                },
             })
             .build()
+    }
+
+    private async configureDatabase() {
+        const configuration = {
+            ...this.configuration.database,
+            entities: [__dirname + '/../data/models/*.js'],
+            migrations: [__dirname + '/../data/migrations/*.js'],
+            uuidExtension: 'uuid-ossp',
+        }
+
+        await createConnection(configuration as ConnectionOptions)
+    }
+
+    private configureLogger() {
+        Logger.configure(this.configuration.log.level)
+        Logger.info('Configuring application')
+    }
+
+    public async configure() {
+        this.configureLogger()
+        await this.configureDatabase()
+        this.configureServer()
     }
 
     public start() {

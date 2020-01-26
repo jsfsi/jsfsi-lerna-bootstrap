@@ -3,7 +3,7 @@ import { Tags } from 'typescript-rest-swagger'
 import { Inject } from 'typescript-ioc'
 import { UnauthorizedError } from '@jsfsi-core/typescript-cross-platform'
 import { LoginService } from '@jsfsi-core/typescript-nodejs'
-import { User } from '@jsfsi-core-bootstrap/contracts'
+import { UserToken } from '../../graphql/types/Login'
 
 interface GoogleToken {
     accessToken: string
@@ -12,7 +12,7 @@ interface GoogleToken {
 @Path('/rest/login')
 export class LoginController {
     @Inject
-    private loginService: LoginService<User>
+    private loginService: LoginService<UserToken>
 
     @POST
     @Path('/google')

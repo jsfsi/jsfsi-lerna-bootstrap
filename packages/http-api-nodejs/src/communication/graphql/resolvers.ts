@@ -1,4 +1,4 @@
 import { HealthResolver } from './resolvers/HealthResolver'
-import { LoginResolver } from '@jsfsi-core/typescript-nodejs'
+import { LoginResolver } from './resolvers/LoginResolver'
 
 export default [HealthResolver, LoginResolver]
