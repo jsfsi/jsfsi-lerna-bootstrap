@@ -36,6 +36,7 @@ describe('Login using rest and google', () => {
         expect(user.tenant).toBeTruthy()
         expect(user.roles).toBeTruthy()
         expect(Object.keys(user.roles).length).toBeGreaterThan(0)
+        expect(userLogin.headers['set-cookie']).toBeTruthy()
     })
 
     it('with invalid google access token', async () => {
