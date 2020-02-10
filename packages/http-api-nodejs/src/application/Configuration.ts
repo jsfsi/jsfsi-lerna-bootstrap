@@ -1,7 +1,7 @@
-export class Configuration {
-    version = process.env.VERSION || 'local'
+export const Configuration = {
+    version: process.env.VERSION || 'local',
 
-    jwt = {
+    jwt: {
         privateKey: process.env.JWT_PRIVATE_KEY,
         algorithm: process.env.JWT_ALGORITHM,
         duration:
@@ -13,30 +13,30 @@ export class Configuration {
                     parseInt(process.env.JWT_REFRESH_TOKEN_DURATION)) ||
                 2592000,
         },
-    }
+    },
 
-    server = {
+    server: {
         port: (process.env.SERVER_PORT && parseInt(process.env.SERVER_PORT, 10)) || 8080,
         corsDomains: process.env.CORS_DOMAINS || '.*',
-    }
+    },
 
-    log = {
+    log: {
         level: process.env.LOG_LEVEL || 'info',
-    }
+    },
 
-    graphql = {
+    graphql: {
         path: process.env.GRAPHQL_PATH || '/graphql',
         tracing: process.env.GRAPHQL_TRACING?.toLowerCase() === 'true' || false,
         playground: process.env.GRAPHQL_PLAYGROUND?.toLowerCase() === 'true' || false,
         introspection:
             process.env.GRAPHQL_INTROSPECTION?.toLowerCase() === 'true' || false,
-    }
+    },
 
-    google = {
+    google: {
         tokenInfoURL: process.env.GOOGLE_TOKENINFO_URL,
-    }
+    },
 
-    database = {
+    database: {
         type: process.env.DATABASE_TYPE || 'postgres',
         host: process.env.DATABASE_HOST || 'localhost',
         port: (process.env.DATABASE_PORT && parseInt(process.env.DATABASE_PORT)) || 5432,
@@ -45,20 +45,20 @@ export class Configuration {
         database: process.env.DATABASE_NAME || 'postgres',
         schema: process.env.DATABASE_SCHEMA || 'bootstrap',
         synchronize: process.env.DATABASE_SYNCHRONIZE?.toLowerCase() === 'true' || false,
-    }
+    },
 
-    cookie = {
+    cookie: {
         name: process.env.COOKIE_NAME || 'jsfsi-bootstrap',
         domain: process.env.COOKIE_DOMAIN || 'localhost',
         secure: process.env.COOKIE_SECURE?.toLowerCase() === 'true' || false,
-    }
+    },
 
-    redis = {
+    redis: {
         host: process.env.REDIS_HOST || 'localhost',
         port: (process.env.REDIS_PORT && parseInt(process.env.REDIS_PORT)) || 6379,
         db: process.env.REDIS_DB || 'bootstrap',
         password: process.env.REDIS_PASSWORD || 'redis',
         ['connect_timeout']:
             (process.env.REDIS_TIMEOUT && parseInt(process.env.REDIS_TIMEOUT)) || 6379,
-    }
+    },
 }

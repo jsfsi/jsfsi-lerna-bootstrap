@@ -1,10 +1,10 @@
-import { GoogleUser, UserRepository } from '@jsfsi-core/typescript-nodejs'
+import { GoogleUser } from '@jsfsi-core/typescript-nodejs'
 import { User } from '../data/models/User'
 import { NotFoundError } from '@jsfsi-core/typescript-cross-platform'
 import { UserToken } from '../communication/graphql/types/Login'
 
-export class BootstrapUserRepository extends UserRepository<UserToken> {
-    async getUserByGoogleUser(googleUser: GoogleUser) {
+export class BootstrapUserRepository {
+    static async getUserByGoogleUser(googleUser: GoogleUser): Promise<UserToken> {
         const user = await User.findOne({ email: googleUser.email })
 
         if (!user) {
@@ -18,6 +18,6 @@ export class BootstrapUserRepository extends UserRepository<UserToken> {
             roles: {
                 admin: '1',
             },
-        } as UserToken
+        }
     }
 }

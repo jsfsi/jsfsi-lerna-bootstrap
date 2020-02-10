@@ -1,10 +1,8 @@
 import { POST, Path, Context, ServiceContext } from 'typescript-rest'
 import { Tags } from 'typescript-rest-swagger'
-import { Inject } from 'typescript-ioc'
 import { UnauthorizedError } from '@jsfsi-core/typescript-cross-platform'
-import { LoginService } from '@jsfsi-core/typescript-nodejs'
-import { UserToken } from '../../graphql/types/Login'
 import { Configuration } from '../../../application/Configuration'
+import { LoginService } from '../../../services/LoginService'
 
 interface GoogleToken {
     accessToken: string
@@ -12,12 +10,6 @@ interface GoogleToken {
 
 @Path('/rest/login')
 export class LoginController {
-    @Inject
-    private configuration: Configuration
-
-    @Inject
-    private loginService: LoginService<UserToken>
-
     @POST
     @Path('/google')
     @Tags('Login')
@@ -26,18 +18,16 @@ export class LoginController {
         @Context context: ServiceContext,
     ) {
         try {
-            const loginInfo = await this.loginService.loginWithGoogle(
-                googleToken?.accessToken,
-            )
+            const loginInfo = await LoginService.loginWithGoogle(googleToken?.accessToken)
 
             context.response.cookie(
-                this.configuration.cookie.name,
+                Configuration.cookie.name,
                 loginInfo.refreshToken.token,
                 {
                     httpOnly: true,
                     maxAge: loginInfo.refreshToken.duration,
-                    domain: this.configuration.cookie.domain,
-                    secure: this.configuration.cookie.secure,
+                    domain: Configuration.cookie.domain,
+                    secure: Configuration.cookie.secure,
                 },
             )
 

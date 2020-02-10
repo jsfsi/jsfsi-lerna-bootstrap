@@ -1,35 +1,29 @@
 import { Resolver, Mutation, Arg, Ctx } from 'type-graphql'
-import { Inject } from 'typescript-ioc'
-import { Login, UserToken } from '../types/Login'
+import { Login } from '../types/Login'
 import { AuthenticationError } from 'apollo-server'
-import { LoginService, Context } from '@jsfsi-core/typescript-nodejs'
+import { Context } from '@jsfsi-core/typescript-nodejs'
 import { Configuration } from '../../../application/Configuration'
+import { LoginService } from '../../../services/LoginService'
 
 @Resolver()
 export class LoginResolver {
-    @Inject
-    private configuration: Configuration
-
-    @Inject
-    private loginService: LoginService<UserToken>
-
     @Mutation(_ => Login)
     async loginWithGoogle(
         @Arg('accessToken') accessToken: string,
         @Ctx() context: Context,
     ): Promise<Login> {
         try {
-            const loginInfo = await this.loginService.loginWithGoogle(accessToken)
+            const loginInfo = await LoginService.loginWithGoogle(accessToken)
 
             context &&
                 context.response.cookie(
-                    this.configuration.cookie.name,
+                    Configuration.cookie.name,
                     loginInfo.refreshToken.token,
                     {
                         httpOnly: true,
                         maxAge: loginInfo.refreshToken.duration,
-                        domain: this.configuration.cookie.domain,
-                        secure: this.configuration.cookie.secure,
+                        domain: Configuration.cookie.domain,
+                        secure: Configuration.cookie.secure,
                     },
                 )
 
