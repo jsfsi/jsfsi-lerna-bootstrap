@@ -64,7 +64,6 @@
 		"pg-hstore": "^2.3.3",
 		"reflect-metadata": "^0.1.13",
 		"typeorm": "^0.2.22",
-		"typescript-ioc": "^1.2.5"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.23",
