@@ -2,7 +2,7 @@ import { Configuration } from '../application/Configuration'
 import { HealthState } from '@jsfsi-core-bootstrap/contracts'
 
 export class HealthService {
-    healthCheck = (): HealthState => {
+    public static healthCheck = (): HealthState => {
         return {
             healthy: true,
             date: new Date(),
