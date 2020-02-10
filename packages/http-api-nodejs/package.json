@@ -62,8 +62,6 @@
 		"@jsfsi-core/typescript-nodejs": "git+ssh://git@github.com/joaosousafranco/jsfsi-core-typescript-nodejs.git",
 		"pg": "^7.17.1",
 		"pg-hstore": "^2.3.3",
-		"redis": "^2.8.0",
-		"redis-mock": "^0.47.0",
 		"reflect-metadata": "^0.1.13",
 		"typeorm": "^0.2.22",
 		"typescript-ioc": "^1.2.5"
