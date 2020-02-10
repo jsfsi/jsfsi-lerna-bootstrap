@@ -8,6 +8,6 @@ export class HealthCheckController {
     @Path('/')
     @Tags('HealthCheck')
     public async health() {
-        return HealthService.healthCheck()
+        return await HealthService.healthCheck()
     }
 }

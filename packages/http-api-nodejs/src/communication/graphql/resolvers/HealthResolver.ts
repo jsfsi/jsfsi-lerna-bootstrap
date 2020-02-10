@@ -6,8 +6,6 @@ import { HealthState } from '../types/HealthState'
 export class HealthResolver {
     @Query(_ => HealthState)
     async healthCheck(): Promise<HealthState> {
-        return new Promise<HealthState>(resolve => {
-            resolve(HealthService.healthCheck())
-        })
+        return await HealthService.healthCheck()
     }
 }
