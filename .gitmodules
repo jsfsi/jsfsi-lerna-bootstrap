@@ -1,0 +1,3 @@
+[submodule "pipelines/jsfsi-pipelines"]
+	path = pipelines/jsfsi-pipelines
+	url = git@github.com:joaosousafranco/jsfsi-pipelines.git

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ${APP_NAME}
+  namespace: ${NAMESPACE}
+spec:
+  type: NodePort
+  selector:
+    app: ${APP_NAME}
+  ports:
+  - name: https
+    port: ${SERVER_PORT}
+    targetPort: ${SERVER_PORT}

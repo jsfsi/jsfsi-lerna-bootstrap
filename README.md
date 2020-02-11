@@ -101,3 +101,9 @@ apt-get install keychain openssl -y
 ssh-keygen -t rsa -b 4096 -f jwt.key && openssl rsa -in jwt.key -pubout -outform PEM -out jwt.key.pub
 cat jwt.key | base64 --wrap=0 && echo "" && echo "" && cat jwt.key.pub | base64 --wrap=0 && echo "" && echo "" && cat jwt.key.pub
 ```
+
+## Add pipelines git submodule
+
+```sh
+git submodule add git@github.com:joaosousafranco/jsfsi-pipelines.git pipelines/jsfsi
+```

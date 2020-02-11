@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: ${APP_NAME}
+ namespace: ${NAMESPACE}
+spec:
+ replicas: 2
+ template:
+  metadata:
+    labels:
+      app: ${APP_NAME}
+  spec:
+    containers:
+    - name: ${APP_NAME}
+      imagePullPolicy: Always
+      image: ${IMAGE}
+      env:
+        - name: VERSION
+          value: "${VERSION}"
+        - name: SERVER_PORT
+          value: "${SERVER_PORT}"
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-user-secret
+              key: secret
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-password-secret
+              key: secret
+        - name: JWT_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: jwt-private-key-secret
+              key: secret
+      resources:
+        limits:
+          memory: 256Mi
+          cpu: 125m
+        requests:
+          memory: 256Mi
+          cpu: 125m
+      ports:
+      - containerPort: ${SERVER_PORT}
+    - name: ${APP_NAME}-nginx-proxy
+      imagePullPolicy: Always
+      image: nginx:1.14-alpine-perl
+      readinessProbe:
+        httpGet:
+          path: ${HEALTH_CHECK}
+          port: ${NGINX_SERVER_PORT}
+        periodSeconds: 60
+        timeoutSeconds: 30
+        successThreshold: 2
+        failureThreshold: 5
+      ports:
+      - containerPort: ${NGINX_SERVER_PORT}
+      volumeMounts:
+      - name: nginx-proxy-config
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+    volumes:
+    - name: nginx-proxy-config
+      configMap:
+        name: proxy-nginx-conf
