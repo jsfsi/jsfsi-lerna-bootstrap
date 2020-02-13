@@ -107,3 +107,11 @@ cat jwt.key | base64 --wrap=0 && echo "" && echo "" && cat jwt.key.pub | base64 
 ```sh
 git submodule add git@github.com:joaosousafranco/jsfsi-pipelines.git pipelines/jsfsi
 ```
+
+## Update submodule
+
+```sh
+cd pipelines/jsfsi-pipelines
+git checkout master
+git pull
+```

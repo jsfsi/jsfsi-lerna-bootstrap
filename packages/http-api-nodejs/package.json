@@ -8,6 +8,7 @@
 		"debug:local": ". ../../pipelines/http-api-nodejs/environments/local.env && nodemon --watch dist --inspect=0.0.0.0:3001 --nolazy dist/src/index.js",
 		"generate:orm:models": "rm -rf src/data/models && sequelize-auto -h localhost -d postgres -s bootstrap -u postgres -x postgres -p 5432 --dialect postgres -o './src/data/models' -z",
 		"lint": "eslint . --quiet --fix --ext .ts,.tsx",
+		"start": "node dist/src/index.js",
 		"start:local": ". ../../pipelines/http-api-nodejs/environments/local.env && node dist/src/index.js",
 		"swagger": "swaggerGen -c ./swagger.config.json",
 		"test:local:integration": ". tests/configuration/test.local.env && jest --rootDir tests/integration",
