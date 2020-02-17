@@ -44,8 +44,20 @@ export class Application {
         Logger.info('Configuring application')
     }
 
+    private unhandledRejection(reason: {}, promise: Promise<object>) {
+        Logger.error('unhandledRejection', reason, promise)
+    }
+
+    private uncaughtException(error: Error) {
+        Logger.error('uncaughtException', error)
+    }
+
     public async configure() {
         this.configureLogger()
+
+        process.on('unhandledRejection', this.unhandledRejection)
+        process.on('uncaughtException', this.uncaughtException)
+        
         await this.configureDatabase()
         this.configureServer()
     }
